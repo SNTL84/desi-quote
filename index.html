@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+   Project  : DesiQuote — Instant Gig Quote Tool
+   Author   : Milan (SNTL 84) — AI Workflow Developer
+   Website  : https://desidevloper.com/
+   GitHub   : https://github.com/SNTL84
+   WhatsApp : https://wa.me/919727413309
+   LinkedIn : https://www.linkedin.com/in/sntl2784
+   Build    : Pure HTML/CSS/JS — zero dependencies
+   © 2025 Milan · SNTL 84 · desidevloper.com
+  ============================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Milan · SNTL 84">
+  <meta name="copyright" content="© 2025 Milan · SNTL 84 · desidevloper.com">
+  <meta name="designer" content="Milan · SNTL 84 · desidevloper.com">
+  <meta name="contact" content="https://wa.me/919727413309">
+  <meta name="generator" content="desidevloper.com">
+  <meta name="description" content="Instant gig quote calculator by Milan · SNTL 84. AI Workflow Automation, Web Apps, Prompt Engineering — get a live price estimate and WhatsApp quote in seconds.">
+  <meta property="og:title" content="DesiQuote — Instant Gig Price Calculator">
+  <meta property="og:description" content="Pick your services, get an instant estimate, hit WhatsApp. Built by Milan · SNTL 84 — desidevloper.com">
+  <meta property="og:site_name" content="SNTL 84 · desidevloper.com">
+  <meta property="og:url" content="https://sntl84.github.io/desi-quote/">
+  <meta name="twitter:creator" content="@SNTL84">
+  <meta name="twitter:card" content="summary">
+  <title>DesiQuote — Instant Gig Quote | Milan · SNTL 84</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /*
+      ============================================================
+       DesiQuote Stylesheet
+       Author  : Milan · SNTL 84
+       Site    : desidevloper.com
+       Contact : https://wa.me/919727413309
+       © 2025 Milan · SNTL 84. All rights reserved.
+      ============================================================
+    */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --amber:   #f0a029;
+      --green:   #22c27a;
+      --blue:    #4a9eff;
+      --bg:      #0c0c0b;
+      --surface: #141413;
+      --card:    #1a1a18;
+      --border:  #2a2a28;
+      --text:    #e8e4dc;
+      --muted:   #8a8880;
+      --faint:   #55534e;
+      --mono:    'IBM Plex Mono', monospace;
+      --sans:    'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100dvh;
+      line-height: 1.6;
+      background-image:
+        radial-gradient(circle at 15% 20%, rgba(240,160,41,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 85% 80%, rgba(34,194,122,0.04) 0%, transparent 50%),
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.015) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.015) 40px);
+    }
+
+    /* ---- HEADER CARD ---- */
+    /* Milan · SNTL 84 · desidevloper.com */
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 0;
+    }
+
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      border: 1px solid rgba(34,194,122,0.3);
+      background: rgba(34,194,122,0.06);
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+    }
+    .brand-pill::before { content: '●'; font-size: 0.5rem; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .brand-name {
+      font-family: var(--mono);
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+    .brand-name span { color: var(--amber); }
+
+    .brand-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+    }
+
+    .tagline {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .tagline em { color: var(--amber); font-style: normal; }
+
+    .sub-tagline {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      max-width: 56ch;
+    }
+
+    /* Links row */
+    /* Milan · SNTL 84 · desidevloper.com */
+    .links-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+    .link-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.18s ease;
+      letter-spacing: 0.03em;
+    }
+    .lb-web  { color: var(--amber); border: 1px solid rgba(240,160,41,0.35); background: rgba(240,160,41,0.07); }
+    .lb-wa   { color: var(--green); border: 1px solid rgba(34,194,122,0.35); background: rgba(34,194,122,0.07); }
+    .lb-li   { color: var(--blue);  border: 1px solid rgba(74,158,255,0.35); background: rgba(74,158,255,0.07); }
+    .lb-gh   { color: var(--text);  border: 1px solid rgba(232,228,220,0.2); background: rgba(232,228,220,0.04); }
+    .link-badge:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+
+    /* ---- CALCULATOR ---- */
+    /* Milan · SNTL 84 · desidevloper.com */
+    .calc-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1rem;
+    }
+
+    /* Services grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(220px,100%), 1fr));
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(240,160,41,0.08), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.18s;
+    }
+    .service-card:hover { border-color: rgba(240,160,41,0.4); transform: translateY(-2px); }
+    .service-card:hover::before { opacity: 1; }
+    .service-card.selected {
+      border-color: var(--amber);
+      background: rgba(240,160,41,0.08);
+    }
+    .service-card.selected::before { opacity: 1; }
+
+    .sc-check {
+      width: 18px; height: 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 0.7rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem;
+      transition: all 0.15s;
+      color: transparent;
+    }
+    .service-card.selected .sc-check {
+      background: var(--amber);
+      border-color: var(--amber);
+      color: #000;
+    }
+
+    .sc-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      color: var(--text);
+    }
+    .sc-price {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--amber);
+    }
+    .sc-desc {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+      line-height: 1.4;
+    }
+
+    /* Modifiers */
+    /* Milan · SNTL 84 · desidevloper.com */
+    .modifiers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+    .modifier {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      background: var(--card);
+      transition: all 0.15s;
+      font-family: var(--mono);
+      color: var(--muted);
+    }
+    .modifier:hover { border-color: rgba(34,194,122,0.4); color: var(--text); }
+    .modifier.active {
+      border-color: var(--green);
+      background: rgba(34,194,122,0.08);
+      color: var(--green);
+    }
+    .modifier .mod-toggle {
+      width: 14px; height: 14px;
+      border-radius: 3px;
+      border: 1.5px solid currentColor;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.6rem;
+    }
+    .modifier.active .mod-toggle {
+      background: var(--green);
+      border-color: var(--green);
+      color: #000;
+    }
+
+    /* Quote display */
+    /* Milan · SNTL 84 · desidevloper.com */
+    .quote-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .quote-breakdown {
+      list-style: none;
+      margin-bottom: 1.25rem;
+    }
+    .quote-breakdown li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+    .quote-breakdown li:last-child { border-bottom: none; }
+    .qb-name { color: var(--muted); }
+    .qb-val  { font-family: var(--mono); color: var(--amber); }
+    .qb-mod  { color: var(--green); }
+
+    .quote-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(240,160,41,0.3);
+    }
+    .qt-label { font-size: 0.8rem; color: var(--muted); font-family: var(--mono); letter-spacing: 0.08em; }
+    .qt-amount {
+      font-family: var(--mono);
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 600;
+      color: var(--amber);
+    }
+
+    /* Empty state */
+    .empty-quote {
+      text-align: center;
+      padding: 2rem;
+      color: var(--faint);
+      font-size: 0.85rem;
+    }
+    .empty-quote svg { margin: 0 auto 0.75rem; opacity: 0.4; }
+
+    /* CTA Button */
+    /* Milan · SNTL 84 · desidevloper.com */
+    .cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: var(--green);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: var(--sans);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.18s ease;
+      letter-spacing: 0.01em;
+    }
+    .cta-btn:hover { background: #1aab6a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(34,194,122,0.3); }
+    .cta-btn:disabled { background: var(--border); color: var(--faint); cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* Footer */
+    /* Milan · SNTL 84 · desidevloper.com */
+    .footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.75rem;
+      color: var(--faint);
+      font-family: var(--mono);
+    }
+    .footer a { color: var(--amber); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .links-row { gap: 0.4rem; }
+      .link-badge { font-size: 0.65rem; padding: 0.3rem 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO / IDENTITY CARD -->
+  <!-- Milan · SNTL 84 · desidevloper.com -->
+  <section class="hero">
+    <div class="brand-pill">Open to Freelance Gigs</div>
+
+    <div class="brand-name">Desi<span>Quote</span></div>
+    <div class="brand-sub">by Milan · SNTL 84 · desidevloper.com</div>
+
+    <p class="tagline">I Automate <em>What's Costing You Money.</em></p>
+    <p class="sub-tagline">AI Systems · Full-Stack Builds · Supply Chain Intelligence<br>Built for founders who move fast and waste nothing.</p>
+
+    <!-- Links row -->
+    <!-- Milan · SNTL 84 · desidevloper.com -->
+    <div class="links-row">
+      <a href="https://desidevloper.com/" target="_blank" rel="noopener noreferrer" class="link-badge lb-web">🌐 desidevloper.com</a>
+      <a href="https://wa.me/919727413309" target="_blank" rel="noopener noreferrer" class="link-badge lb-wa">💬 WhatsApp</a>
+      <a href="https://www.linkedin.com/in/sntl2784" target="_blank" rel="noopener noreferrer" class="link-badge lb-li">in LinkedIn</a>
+      <a href="https://github.com/SNTL84" target="_blank" rel="noopener noreferrer" class="link-badge lb-gh">⌨ GitHub</a>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <!-- Milan · SNTL 84 · desidevloper.com -->
+  <section class="calc-wrap">
+
+    <div class="section-label">— Select Services</div>
+
+    <!-- Services -->
+    <!-- Milan · SNTL 84 · desidevloper.com -->
+    <div class="services-grid" id="servicesGrid">
+      <!-- JS renders these -->
+    </div>
+
+    <div class="section-label">— Project Modifiers</div>
+
+    <!-- Modifiers -->
+    <!-- Milan · SNTL 84 · desidevloper.com -->
+    <div class="modifiers" id="modifiers"></div>
+
+    <div class="section-label">— Your Estimate</div>
+
+    <!-- Quote card -->
+    <!-- Milan · SNTL 84 · desidevloper.com -->
+    <div class="quote-card">
+      <ul class="quote-breakdown" id="breakdown">
+        <li class="empty-quote" id="emptyMsg">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg>
+          Pick a service above to start your quote
+        </li>
+      </ul>
+      <div class="quote-total">
+        <span class="qt-label">ESTIMATED TOTAL</span>
+        <span class="qt-amount" id="totalDisplay">₹0</span>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <!-- Milan · SNTL 84 · desidevloper.com -->
+    <a href="#" id="ctaBtn" class="cta-btn" style="pointer-events:none;opacity:0.4;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.551 4.1 1.515 5.824L.057 23.438a.5.5 0 00.612.612l5.657-1.453A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+      Send Quote on WhatsApp
+    </a>
+
+    <p style="font-size:0.72rem;color:var(--faint);text-align:center;margin-top:0.75rem;font-family:var(--mono);">// final pricing confirmed on a quick call. zero commitment to enquire.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <!-- Milan · SNTL 84 · desidevloper.com -->
+  <footer class="footer">
+    &copy; 2025 <a href="https://desidevloper.com/" target="_blank" rel="noopener noreferrer">Milan · SNTL 84 · desidevloper.com</a><br>
+    AI Workflow Developer · Surat, Gujarat, India
+  </footer>
+
+  <script>
+    /*
+      ============================================================
+       DesiQuote — Quote Calculator Logic
+       Author  : Milan · SNTL 84
+       Site    : https://desidevloper.com/
+       GitHub  : https://github.com/SNTL84
+       Contact : https://wa.me/919727413309
+       © 2025 Milan · SNTL 84. All rights reserved.
+      ============================================================
+    */
+    const _author = 'Milan · SNTL 84';
+    const _site   = 'https://desidevloper.com/';
+    const _github = 'https://github.com/SNTL84';
+    const _wa     = 'https://wa.me/919727413309';
+
+    const SERVICES = [
+      { id:'ai',   name:'AI Workflow Automation', price:7500,  desc:'n8n / Make / custom AI pipelines' },
+      { id:'web',  name:'Web App Development',    price:10000, desc:'Full-stack TypeScript / Vite / Node' },
+      { id:'pe',   name:'Prompt Engineering',     price:4000,  desc:'LLM tuning, system prompts, RAG' },
+      { id:'va',   name:'Virtual Assistant Build', price:6000,  desc:'Browser automation & task bots' },
+      { id:'da',   name:'Data Automation',        price:5000,  desc:'Sheets, APIs, ETL pipelines' },
+      { id:'ca',   name:'AI Consulting / Audit',  price:2500,  desc:'1:1 review of your AI stack' },
+    ];
+
+    const MODS = [
+      { id:'urgent',  label:'Urgent Delivery (2×)',      fn: x => x * 2 },
+      { id:'complex', label:'Complex Integrations (+50%)', fn: x => Math.round(x * 1.5) },
+      { id:'retain',  label:'Monthly Retainer +₹2,000',   flat: 2000 },
+    ];
+
+    let selected = new Set();
+    let activeMods = new Set();
+
+    /* --- Render Services --- */
+    const grid = document.getElementById('servicesGrid');
+    SERVICES.forEach(s => {
+      const card = document.createElement('div');
+      card.className = 'service-card';
+      card.dataset.id = s.id;
+      card.innerHTML = `
+        <div class="sc-check">✔</div>
+        <div class="sc-name">${s.name}</div>
+        <div class="sc-price">₹${s.price.toLocaleString('en-IN')}</div>
+        <div class="sc-desc">${s.desc}</div>`;
+      card.addEventListener('click', () => {
+        selected.has(s.id) ? selected.delete(s.id) : selected.add(s.id);
+        card.classList.toggle('selected');
+        updateQuote();
+      });
+      grid.appendChild(card);
+    });
+
+    /* --- Render Modifiers --- */
+    const modWrap = document.getElementById('modifiers');
+    MODS.forEach(m => {
+      const el = document.createElement('div');
+      el.className = 'modifier';
+      el.dataset.id = m.id;
+      el.innerHTML = `<span class="mod-toggle">✔</span> ${m.label}`;
+      el.addEventListener('click', () => {
+        activeMods.has(m.id) ? activeMods.delete(m.id) : activeMods.add(m.id);
+        el.classList.toggle('active');
+        updateQuote();
+      });
+      modWrap.appendChild(el);
+    });
+
+    /* --- Quote Calculation --- */
+    function updateQuote() {
+      const breakdown = document.getElementById('breakdown');
+      const totalEl   = document.getElementById('totalDisplay');
+      const ctaBtn    = document.getElementById('ctaBtn');
+      const emptyMsg  = document.getElementById('emptyMsg');
+
+      if (selected.size === 0) {
+        breakdown.innerHTML = '';
+        breakdown.appendChild(emptyMsg);
+        totalEl.textContent = '₹0';
+        ctaBtn.style.pointerEvents = 'none';
+        ctaBtn.style.opacity = '0.4';
+        return;
+      }
+
+      let base = 0;
+      const lines = [];
+      SERVICES.filter(s => selected.has(s.id)).forEach(s => {
+        base += s.price;
+        lines.push({ name: s.name, val: s.price, type: 'service' });
+      });
+
+      let total = base;
+      const modLines = [];
+
+      if (activeMods.has('urgent')) {
+        const add = base; // doubling
+        modLines.push({ name: 'Urgent Delivery (2×)', val: add, type: 'mod' });
+        total = base * 2;
+      }
+      if (activeMods.has('complex')) {
+        const add = Math.round(total * 0.5);
+        modLines.push({ name: 'Complex Integrations (+50%)', val: add, type: 'mod' });
+        total = Math.round(total * 1.5);
+      }
+      if (activeMods.has('retain')) {
+        modLines.push({ name: 'Monthly Retainer', val: 2000, type: 'mod' });
+        total += 2000;
+      }
+
+      breakdown.innerHTML = '';
+      [...lines, ...modLines].forEach(l => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span class="qb-name">${l.name}</span><span class="qb-val ${l.type === 'mod' ? 'qb-mod' : ''}">₹${l.val.toLocaleString('en-IN')}</span>`;
+        breakdown.appendChild(li);
+      });
+
+      totalEl.textContent = `₹${total.toLocaleString('en-IN')}`;
+
+      // Build WhatsApp message
+      const serviceList = SERVICES.filter(s => selected.has(s.id)).map(s => `  • ${s.name} (₹${s.price.toLocaleString('en-IN')})`).join('\n');
+      const modList     = MODS.filter(m => activeMods.has(m.id)).map(m => `  + ${m.label}`).join('\n');
+      const msg = encodeURIComponent(
+        `Hi Milan (desidevloper.com),\n\nI'd like to enquire about a project. Here's my DesiQuote estimate:\n\nServices:\n${serviceList}${modList ? '\n\nModifiers:\n'+modList : ''}\n\nEstimated Total: ₹${total.toLocaleString('en-IN')}\n\nPlease let me know your availability.`
+      );
+      ctaBtn.href = `https://wa.me/919727413309?text=${msg}`;
+      ctaBtn.style.pointerEvents = 'auto';
+      ctaBtn.style.opacity = '1';
+    }
+  </script>
+
+</body>
+</html>
